@@ -71,12 +71,12 @@ The generator creates a fictional regional network with realistic operating rela
 
 | Dimension | Synthetic design |
 |---|---:|
-| Analysis period | 90 days: 2025-01-06 through 2025-04-05 |
+| Analysis period | 90 days: 2026-01-06 through 2026-04-05 |
 | Stations | 3 fictional nodes |
 | DSPs | 4 fictional providers |
 | Drivers | 100 fictional drivers |
-| Routes | 5,347 |
-| Package deliveries | 237,891 |
+| Routes | 5,441 |
+| Package deliveries | 241,349 |
 | Random seed | `20250317` |
 
 Embedded synthetic behavior includes lower route density increasing late-delivery risk, service degradation at high utilization, pickup delay reducing OTD, driver reliability influencing outcomes, fictional station/DSP differences, weekday and peak effects, and sparse injected anomalies.
@@ -161,8 +161,8 @@ Logistic Regression and Random Forest are compared using only signals available 
 
 | Model | Holdout ROC-AUC | Precision | Recall | F1 |
 |---|---:|---:|---:|---:|
-| Logistic Regression | 0.902 | 0.760 | 0.805 | 0.782 |
-| Random Forest | 0.892 | 0.767 | 0.779 | 0.773 |
+| Logistic Regression | 0.905 | 0.785 | 0.844 | 0.813 |
+| Random Forest | 0.897 | 0.759 | 0.830 | 0.793 |
 
 The selected prototype outputs a route-level risk score, Low/Medium/High tier, and feature importance. These metrics are synthetic portfolio results—not evidence of production model performance.
 
@@ -182,13 +182,13 @@ Reusable components provide consistent filters, KPI cards, insight cards, status
 
 The following results were calculated from generated data and demonstrate operational reasoning only:
 
-- Regional synthetic OTD was **84.5%**, delivery success **96.8%**, and exception rate **15.5%**.
-- Above a data-derived **102.1% utilization threshold**, average OTD was **7.7 percentage points lower**.
-- Above a data-derived **16.4-minute pickup-delay threshold**, average OTD was **12.1 percentage points lower**.
-- Fictional `DSP_GAMMA` had the lowest synthetic OTD at **75.3%**, **9.2 points below** the regional result.
-- Fictional `STN_B` had the highest synthetic station exception rate at **22.3%**.
+- Regional synthetic OTD was **84.5%**, delivery success **96.7%**, and exception rate **15.5%**.
+- Above a data-derived **102.0% utilization threshold**, average OTD was **7.0 percentage points lower**.
+- Above a data-derived **16.1-minute pickup-delay threshold**, average OTD was **12.1 percentage points lower**.
+- Fictional `DSP_GHI` had the lowest synthetic OTD at **75.9%**, **8.6 points below** the regional result.
+- Fictional `EWR02` had the highest synthetic station exception rate at **22.3%**.
 - The rolling monitor identified **31 synthetic OTD-drop or exception-spike events**.
-- `LATE_DELIVERY` represented **77.0%** of synthetic exceptions.
+- `LATE_DELIVERY` represented **76.6%** of synthetic exceptions.
 
 These are **synthetic project findings**, not observations, estimates, or claims about a real logistics network.
 

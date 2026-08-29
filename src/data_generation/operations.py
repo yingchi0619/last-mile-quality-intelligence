@@ -48,14 +48,14 @@ def generate_routes(config: GenerationConfig, drivers: pd.DataFrame, rng: np.ran
                 utilization = actual_packages / planned_capacity
                 pickup_delay = max(0.0, rng.normal(5.5, 5.5) + max(utilization - 0.95, 0) * 36 + (4 if peak_day else 0) - provider["quality_effect"] * 5)
                 anomaly_type = "NONE"
-                if day_index == 21 and station_id == "STN_B":
+                if day_index == 21 and station_id == "EWR02":
                     pickup_delay += rng.uniform(35, 60)
                     anomaly_type = "STATION_SORT_DELAY"
-                elif day_index in (56, 57) and provider_id == "DSP_GAMMA":
+                elif day_index in (56, 57) and provider_id == "DSP_GHI":
                     actual_packages = min(actual_packages + int(rng.integers(12, 22)), 82)
                     pickup_delay += rng.uniform(18, 35)
                     anomaly_type = "PROVIDER_CAPACITY_STRESS"
-                elif day_index == 73 and station_id == "STN_C":
+                elif day_index == 73 and station_id == "EWR03":
                     pickup_delay += rng.uniform(20, 42)
                     anomaly_type = "LOCAL_PROCESS_DISRUPTION"
                 reliability = (float(driver["historical_attendance_rate"]) + float(driver["historical_delivery_success_rate"])) / 2
