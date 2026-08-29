@@ -5,6 +5,8 @@ from __future__ import annotations
 import pandas as pd
 import streamlit as st
 
+from app.i18n import tr
+
 
 def filter_bar(data: pd.DataFrame, key_prefix: str, default_days: int = 30) -> tuple[pd.Timestamp, pd.Timestamp, list[str], list[str]]:
     minimum, maximum = data["service_date"].min().date(), data["service_date"].max().date()
@@ -12,19 +14,19 @@ def filter_bar(data: pd.DataFrame, key_prefix: str, default_days: int = 30) -> t
     stations = sorted(data["station_id"].unique())
     providers = sorted(data["provider_id"].unique())
     with st.container(border=True):
-        st.markdown('<div class="filter-label">GLOBAL FILTERS</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="filter-label">{tr("GLOBAL FILTERS", "全局筛选")}</div>', unsafe_allow_html=True)
         date_col, station_col, dsp_col, reset_col = st.columns([1.45, 1, 1, 0.45], vertical_alignment="bottom")
         with date_col:
             selected_dates = st.date_input(
-                "Date range", value=(default_start, maximum), min_value=minimum, max_value=maximum,
+                tr("Date range", "日期范围"), value=(default_start, maximum), min_value=minimum, max_value=maximum,
                 key=f"{key_prefix}_dates",
             )
         with station_col:
-            selected_stations = st.multiselect("Station", stations, default=stations, key=f"{key_prefix}_stations")
+            selected_stations = st.multiselect(tr("Station", "站点"), stations, default=stations, key=f"{key_prefix}_stations")
         with dsp_col:
             selected_dsps = st.multiselect("DSP", providers, default=providers, key=f"{key_prefix}_dsps")
         with reset_col:
-            if st.button("Reset", key=f"{key_prefix}_reset", width="stretch"):
+            if st.button(tr("Reset", "重置"), key=f"{key_prefix}_reset", width="stretch"):
                 for suffix in ["dates", "stations", "dsps"]:
                     st.session_state.pop(f"{key_prefix}_{suffix}", None)
                 st.rerun()

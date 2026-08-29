@@ -4,10 +4,12 @@ import math
 from typing import Optional
 import streamlit as st
 
+from app.i18n import tr
+
 
 def kpi_card(name: str, value: str, delta: Optional[float], context: str, inverse: bool = False, delta_suffix: str = "pp") -> None:
     if delta is None or (isinstance(delta, float) and math.isnan(delta)):
-        delta_html = '<span class="delta neutral">— No comparison</span>'
+        delta_html = f'<span class="delta neutral">— {tr("No comparison", "无对比数据")}</span>'
     else:
         good = delta < 0 if inverse else delta > 0
         css = "positive" if good else ("negative" if delta != 0 else "neutral")

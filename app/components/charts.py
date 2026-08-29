@@ -6,6 +6,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
+from app.i18n import tr
+
 BLUE = "#2563EB"
 BLUE_LIGHT = "#93C5FD"
 GREEN = "#16A34A"
@@ -30,9 +32,9 @@ def style_figure(fig: go.Figure, height: int = 360, legend: bool = False) -> go.
 
 def trend_chart(data: pd.DataFrame, value: str, rolling: str, target: float = 0.95) -> go.Figure:
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=data["service_date"], y=data[value], mode="lines", line=dict(color=BLUE_LIGHT, width=1.5), fill="tozeroy", fillcolor="rgba(37,99,235,.06)", name="Daily"))
-    fig.add_trace(go.Scatter(x=data["service_date"], y=data[rolling], mode="lines", line=dict(color=BLUE, width=3), name="7-day rolling"))
-    fig.add_hline(y=target, line_dash="dot", line_color=ORANGE, annotation_text=f"Target {target:.0%}", annotation_position="top left")
+    fig.add_trace(go.Scatter(x=data["service_date"], y=data[value], mode="lines", line=dict(color=BLUE_LIGHT, width=1.5), fill="tozeroy", fillcolor="rgba(37,99,235,.06)", name=tr("Daily", "每日")))
+    fig.add_trace(go.Scatter(x=data["service_date"], y=data[rolling], mode="lines", line=dict(color=BLUE, width=3), name=tr("7-day rolling", "7日滚动平均")))
+    fig.add_hline(y=target, line_dash="dot", line_color=ORANGE, annotation_text=f"{tr('Target', '目标')} {target:.0%}", annotation_position="top left")
     fig.update_yaxes(tickformat=".0%", range=[max(0, data[value].min() - .08), 1])
     return style_figure(fig, 380, True)
 
@@ -43,6 +45,8 @@ def scatter_capacity(data: pd.DataFrame) -> go.Figure:
     fig.add_vline(x=1.0, line_dash="dash", line_color=ORANGE, annotation_text="100%")
     fig.update_xaxes(tickformat=".0%")
     fig.update_yaxes(tickformat=".0%")
+    fig.update_xaxes(title=tr("Capacity Utilization", "运力利用率"))
+    fig.update_yaxes(title=tr("On-Time Delivery", "准时送达率"))
     return style_figure(fig, 410, True)
 
 

@@ -178,6 +178,8 @@ The dashboard is designed as a modern internal operations product rather than a 
 
 Reusable components provide consistent filters, KPI cards, insight cards, status badges, chart styling, page headers, and synthetic-data messaging. DuckDB queries, processed datasets, and model artifacts are cached for responsive interaction.
 
+Every dashboard page includes an **EN / 中文** control in the upper-right corner. The selected language is stored in the Streamlit session, so navigation between pages preserves the user's language until it is switched again.
+
 ## Key Synthetic Findings
 
 The following results were calculated from generated data and demonstrate operational reasoning only:
