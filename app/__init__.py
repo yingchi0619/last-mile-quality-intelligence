@@ -1,1 +1,1 @@
-"""Streamlit application package (reserved for a later phase)."""
+"""Streamlit application package for the operations intelligence platform."""

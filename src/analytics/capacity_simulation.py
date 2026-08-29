@@ -153,6 +153,32 @@ class CapacityAllocationSimulator:
                 )
         raise ValueError("No feasible overloaded/underutilized DSP pair was found.")
 
+    def create_scenario(
+        self,
+        service_date: str,
+        station: str,
+        source_provider: str,
+        receiving_provider: str,
+        maximum_acceptable_utilization: float = 0.95,
+    ) -> AllocationScenario:
+        """Create an interactive scenario from an observed synthetic station/day."""
+        if source_provider == receiving_provider:
+            raise ValueError("Source and receiving DSP must be different.")
+        date = pd.Timestamp(service_date)
+        matches = self.daily_states[
+            (self.daily_states["service_date"] == date)
+            & (self.daily_states["station"] == station)
+        ]
+        source = matches[matches["provider_id"] == source_provider]
+        receiver = matches[matches["provider_id"] == receiving_provider]
+        if source.empty or receiver.empty:
+            raise ValueError("Both DSPs must have activity at the selected station and date.")
+        return AllocationScenario(
+            overloaded=self._state_from_row(source.iloc[0]),
+            receiver=self._state_from_row(receiver.iloc[0]),
+            maximum_acceptable_utilization=maximum_acceptable_utilization,
+        )
+
     @staticmethod
     def _feature_row(state: DSPScenarioState, volume: float) -> pd.DataFrame:
         service_date = pd.Timestamp(state.service_date)
@@ -187,13 +213,23 @@ class CapacityAllocationSimulator:
             metrics[outcome] = float(np.clip(anchors[outcome] + predicted_after - predicted_before, 0, 1))
         return metrics
 
-    def simulate(self, scenario: AllocationScenario) -> tuple[pd.DataFrame, dict[str, object]]:
+    def simulate(
+        self,
+        scenario: AllocationScenario,
+        transfer_packages: Optional[float] = None,
+    ) -> tuple[pd.DataFrame, dict[str, object]]:
         """Transfer the feasible overload and compare both DSPs before and after."""
         overloaded, receiver = scenario.overloaded, scenario.receiver
         limit = scenario.maximum_acceptable_utilization
         required_relief = max(0.0, overloaded.package_volume - limit * overloaded.dsp_capacity)
         receiver_spare = max(0.0, limit * receiver.dsp_capacity - receiver.package_volume)
-        transfer_packages = float(max(0, math.floor(min(required_relief, receiver_spare))))
+        maximum_feasible_transfer = float(max(0, math.floor(min(overloaded.package_volume, receiver_spare))))
+        if transfer_packages is None:
+            transfer_packages = float(max(0, math.floor(min(required_relief, receiver_spare))))
+        else:
+            transfer_packages = float(transfer_packages)
+            if transfer_packages > maximum_feasible_transfer:
+                raise ValueError("Transfer exceeds receiving capacity under the configured limit.")
         if transfer_packages < 1:
             raise ValueError("Scenario has no transferable capacity under the configured limit.")
 
