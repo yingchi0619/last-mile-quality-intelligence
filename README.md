@@ -33,7 +33,7 @@ last-mile-quality-intelligence/
 │   ├── raw/                   # Future immutable synthetic source data
 │   └── processed/             # Future cleaned and analysis-ready data
 ├── notebooks/                 # Future exploratory notebooks
-├── sql/                       # Future reusable DuckDB SQL queries
+├── sql/                       # DuckDB loading, views, and business queries
 ├── src/
 │   ├── analytics/             # KPI and root-cause analysis modules
 │   ├── data_generation/       # Reproducible synthetic-data generators
@@ -42,6 +42,7 @@ last-mile-quality-intelligence/
 ├── tests/                     # Automated tests
 ├── .gitignore
 ├── generate_data.py           # Synthetic-data generation entry point
+├── build_database.py          # DuckDB analytical-layer build entry point
 ├── main.py                    # Environment smoke-check entry point
 └── requirements.txt
 ```
@@ -58,6 +59,7 @@ python -m pip install -r requirements.txt
 python main.py
 pytest
 python generate_data.py
+python build_database.py
 ```
 
 On Windows PowerShell, activate the environment with:
@@ -68,7 +70,7 @@ On Windows PowerShell, activate the environment with:
 
 ## Current status
 
-Synthetic data generation is implemented for stations, providers, drivers, routes, and deliveries. Generated Parquet files are intentionally excluded from Git. No dashboard, machine-learning implementation, or production analysis is included at this stage.
+Synthetic data generation and a DuckDB SQL analytics layer are implemented for stations, providers, drivers, routes, and deliveries. The SQL layer includes six KPI views and ten business-question queries. Generated Parquet and DuckDB files are intentionally excluded from Git. No dashboard or machine-learning implementation is included at this stage.
 
 ## License
 
