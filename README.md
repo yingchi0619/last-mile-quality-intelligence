@@ -44,6 +44,7 @@ last-mile-quality-intelligence/
 ├── generate_data.py           # Synthetic-data generation entry point
 ├── build_database.py          # DuckDB analytical-layer build entry point
 ├── run_root_cause_analysis.py # Operational RCA and insight-generation entry point
+├── run_capacity_simulation.py # DSP volume-allocation scenario entry point
 ├── main.py                    # Environment smoke-check entry point
 └── requirements.txt
 ```
@@ -62,6 +63,7 @@ pytest
 python generate_data.py
 python build_database.py
 python run_root_cause_analysis.py
+python run_capacity_simulation.py
 ```
 
 On Windows PowerShell, activate the environment with:
@@ -72,7 +74,7 @@ On Windows PowerShell, activate the environment with:
 
 ## Current status
 
-Synthetic data generation, a DuckDB SQL analytics layer, and a modular operational root-cause analysis workflow are implemented. RCA outputs include correlations, segmentation, thresholds, trends, rolling averages, z-score anomalies, exception Pareto, benchmarks, and a manager-facing insights summary. Generated data, databases, and analysis outputs are intentionally excluded from Git. No dashboard or machine-learning implementation is included at this stage.
+Synthetic data generation, a DuckDB SQL analytics layer, modular operational root-cause analysis, and a capacity-allocation scenario simulator are implemented. Generated data, databases, and analysis outputs are intentionally excluded from Git. No dashboard is included at this stage.
 
 ## License
 

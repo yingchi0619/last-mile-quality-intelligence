@@ -26,6 +26,7 @@ def load_route_factors(database_path: Optional[PathLike] = None) -> pd.DataFrame
             driver_id,
             STRFTIME(service_date, '%A') AS day_of_week,
             pickup_delay_minutes,
+            planned_capacity,
             capacity_utilization,
             route_density,
             route_distance_miles,
