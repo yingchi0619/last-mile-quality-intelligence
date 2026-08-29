@@ -16,7 +16,7 @@ This project is designed to demonstrate capabilities in:
 - Basic forecasting analysis
 - Operational process improvement
 
-The planned workflow uses Python, pandas, NumPy, DuckDB, SQL, Streamlit, Plotly, scikit-learn, and pytest. This initial version contains only the extensible project structure and environment checks; dashboards, models, synthetic datasets, and formal analyses will be added in later phases.
+The workflow uses Python, pandas, NumPy, DuckDB, SQL, Streamlit, Plotly, scikit-learn, and pytest. The current version includes a reproducible 90-day synthetic data generator. Dashboards, models, and formal analyses remain out of scope for this phase.
 
 ## Data ethics and scope
 
@@ -41,6 +41,7 @@ last-mile-quality-intelligence/
 │   └── utils/                 # Shared configuration and helper functions
 ├── tests/                     # Automated tests
 ├── .gitignore
+├── generate_data.py           # Synthetic-data generation entry point
 ├── main.py                    # Environment smoke-check entry point
 └── requirements.txt
 ```
@@ -56,6 +57,7 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 python main.py
 pytest
+python generate_data.py
 ```
 
 On Windows PowerShell, activate the environment with:
@@ -66,7 +68,7 @@ On Windows PowerShell, activate the environment with:
 
 ## Current status
 
-Project scaffold only. No dashboard, machine-learning implementation, production analysis, or operational dataset is included at this stage.
+Synthetic data generation is implemented for stations, providers, drivers, routes, and deliveries. Generated Parquet files are intentionally excluded from Git. No dashboard, machine-learning implementation, or production analysis is included at this stage.
 
 ## License
 
