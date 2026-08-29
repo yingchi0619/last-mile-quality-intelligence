@@ -43,6 +43,7 @@ last-mile-quality-intelligence/
 ├── .gitignore
 ├── generate_data.py           # Synthetic-data generation entry point
 ├── build_database.py          # DuckDB analytical-layer build entry point
+├── run_root_cause_analysis.py # Operational RCA and insight-generation entry point
 ├── main.py                    # Environment smoke-check entry point
 └── requirements.txt
 ```
@@ -60,6 +61,7 @@ python main.py
 pytest
 python generate_data.py
 python build_database.py
+python run_root_cause_analysis.py
 ```
 
 On Windows PowerShell, activate the environment with:
@@ -70,7 +72,7 @@ On Windows PowerShell, activate the environment with:
 
 ## Current status
 
-Synthetic data generation and a DuckDB SQL analytics layer are implemented for stations, providers, drivers, routes, and deliveries. The SQL layer includes six KPI views and ten business-question queries. Generated Parquet and DuckDB files are intentionally excluded from Git. No dashboard or machine-learning implementation is included at this stage.
+Synthetic data generation, a DuckDB SQL analytics layer, and a modular operational root-cause analysis workflow are implemented. RCA outputs include correlations, segmentation, thresholds, trends, rolling averages, z-score anomalies, exception Pareto, benchmarks, and a manager-facing insights summary. Generated data, databases, and analysis outputs are intentionally excluded from Git. No dashboard or machine-learning implementation is included at this stage.
 
 ## License
 
