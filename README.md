@@ -45,6 +45,7 @@ last-mile-quality-intelligence/
 ├── build_database.py          # DuckDB analytical-layer build entry point
 ├── run_root_cause_analysis.py # Operational RCA and insight-generation entry point
 ├── run_capacity_simulation.py # DSP volume-allocation scenario entry point
+├── run_late_delivery_model.py # Prototype route-risk training entry point
 ├── main.py                    # Environment smoke-check entry point
 └── requirements.txt
 ```
@@ -64,6 +65,7 @@ python generate_data.py
 python build_database.py
 python run_root_cause_analysis.py
 python run_capacity_simulation.py
+python run_late_delivery_model.py
 ```
 
 On Windows PowerShell, activate the environment with:
@@ -75,6 +77,10 @@ On Windows PowerShell, activate the environment with:
 ## Current status
 
 Synthetic data generation, a DuckDB SQL analytics layer, modular operational root-cause analysis, and a capacity-allocation scenario simulator are implemented. Generated data, databases, and analysis outputs are intentionally excluded from Git. No dashboard is included at this stage.
+
+> “A prototype demonstrating how pre-dispatch operational signals can be used to identify potentially high-risk routes.”
+
+The Late Delivery Risk Model compares Logistic Regression and Random Forest using chronological validation and holdout periods. It explicitly remains a portfolio prototype—not production-ready AI.
 
 ## License
 
