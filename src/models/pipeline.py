@@ -79,7 +79,7 @@ def run_late_delivery_model(
         train_scores[selected_model], [0.50, 0.80]
     )
     predictions = test[
-        ["route_id", "service_date", "station_id", "provider_id", "late_route_flag", "on_time_delivery_rate"]
+        ["route_id", "route_line_id", "service_date", "station_id", "provider_id", "late_route_flag", "on_time_delivery_rate"]
     ].copy()
     for model_name, scores in test_scores.items():
         predictions[f"{model_name}_risk_score"] = scores

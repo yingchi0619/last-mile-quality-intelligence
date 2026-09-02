@@ -48,12 +48,12 @@ def render(routes: pd.DataFrame) -> None:
     watchlist = current[current["risk_tier"] == "High Risk"].copy()
     watchlist["Primary Risk Factor"] = watchlist.apply(_primary_factor, axis=1)
     watchlist["risk_tier"] = watchlist["risk_tier"].map(local_risk)
-    watchlist = watchlist[["route_id", "station_id", "provider_id", "driver_id", "planned_packages", "expected_capacity_utilization", "route_density", "pickup_delay_minutes", "late_delivery_risk_score", "risk_tier", "Primary Risk Factor"]].sort_values("late_delivery_risk_score", ascending=False)
+    watchlist = watchlist[["route_line_id", "route_id", "station_id", "provider_id", "driver_id", "planned_packages", "expected_capacity_utilization", "route_density", "pickup_delay_minutes", "late_delivery_risk_score", "risk_tier", "Primary Risk Factor"]].sort_values("late_delivery_risk_score", ascending=False)
     if watchlist.empty:
         st.info(tr("No high-risk routes match the current filter selection.", "当前筛选条件下没有高风险路线。"))
     else:
         st.dataframe(watchlist, hide_index=True, width="stretch", height=410,
-        column_config={"route_id":tr("Route", "路线"), "station_id":tr("Station", "站点"), "provider_id":"DSP", "driver_id":tr("Driver", "司机"),
+        column_config={"route_line_id":tr("Route Line", "线路"), "route_id":tr("Assignment", "任务"), "station_id":tr("Station", "站点"), "provider_id":"DSP", "driver_id":tr("Driver", "司机"),
             "planned_packages":tr("Planned Packages", "计划包裹量"), "expected_capacity_utilization":st.column_config.ProgressColumn(tr("Expected Utilization", "预计利用率"), min_value=0, max_value=1.3, format="%.1%%"),
             "route_density":st.column_config.NumberColumn(tr("Density", "路线密度"), format="%.2f"), "pickup_delay_minutes":st.column_config.NumberColumn(tr("Pickup Delay", "提货延迟"), format="%.1f min"),
             "late_delivery_risk_score":st.column_config.ProgressColumn(tr("Risk Score", "风险评分"), min_value=0, max_value=1, format="%.1%%"), "risk_tier":tr("Risk Level", "风险等级"), "Primary Risk Factor":tr("Primary Risk Factor", "主要风险因素")})

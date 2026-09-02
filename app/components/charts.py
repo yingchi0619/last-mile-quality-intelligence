@@ -40,7 +40,7 @@ def trend_chart(data: pd.DataFrame, value: str, rolling: str, target: float = 0.
 
 
 def scatter_capacity(data: pd.DataFrame) -> go.Figure:
-    fig = px.scatter(data, x="capacity_utilization", y="on_time_delivery_rate", size="actual_packages", color="provider_id", color_discrete_sequence=PALETTE, hover_data=["route_id", "station_id", "pickup_delay_minutes"], opacity=.72)
+    fig = px.scatter(data, x="capacity_utilization", y="on_time_delivery_rate", size="actual_packages", color="provider_id", color_discrete_sequence=PALETTE, hover_data=["route_line_id", "station_id", "pickup_delay_minutes"], opacity=.72)
     fig.add_vline(x=.90, line_dash="dot", line_color="#94A3B8", annotation_text="90%")
     fig.add_vline(x=1.0, line_dash="dash", line_color=ORANGE, annotation_text="100%")
     fig.update_xaxes(tickformat=".0%")

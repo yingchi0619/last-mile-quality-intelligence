@@ -13,16 +13,16 @@ class GenerationConfig:
     seed: int = 20250317
     start_date: str = "2026-01-06"
     days: int = 90
-    min_routes_per_station_day: int = 15
-    max_routes_per_station_day: int = 25
+    min_routes_per_station_day: int = 12
+    max_routes_per_station_day: int = 18
     driver_count: int = 100
     output_dir: Path = Path("data/raw")
 
 
 STATION_PROFILES = (
-    {"station_id": "EWR01", "station_name": "EWR01 Operations Node", "region": "REGION_NORTH", "market_type": "URBAN_CORE", "quality_effect": 0.45, "density_mean": 1.65, "distance_mean": 42.0},
-    {"station_id": "EWR02", "station_name": "EWR02 Operations Node", "region": "REGION_CENTRAL", "market_type": "SUBURBAN_RING", "quality_effect": -0.35, "density_mean": 1.12, "distance_mean": 61.0},
-    {"station_id": "EWR03", "station_name": "EWR03 Operations Node", "region": "REGION_SOUTH", "market_type": "MIXED_MARKET", "quality_effect": 0.05, "density_mean": 1.35, "distance_mean": 53.0},
+    {"station_id": "EWR01", "station_name": "EWR01 Operations Node", "region": "REGION_NORTH", "market_type": "URBAN_CORE", "quality_effect": 0.45, "density_mean": 1.65, "distance_mean": 42.0, "route_line_count": 16},
+    {"station_id": "EWR02", "station_name": "EWR02 Operations Node", "region": "REGION_CENTRAL", "market_type": "SUBURBAN_RING", "quality_effect": -0.35, "density_mean": 1.12, "distance_mean": 61.0, "route_line_count": 18},
+    {"station_id": "EWR03", "station_name": "EWR03 Operations Node", "region": "REGION_SOUTH", "market_type": "MIXED_MARKET", "quality_effect": 0.05, "density_mean": 1.35, "distance_mean": 53.0, "route_line_count": 14},
 )
 
 PROVIDER_PROFILES = (

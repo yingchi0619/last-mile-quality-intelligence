@@ -68,7 +68,7 @@ def render(routes: pd.DataFrame) -> None:
 
     left, right = st.columns([1.15, .85])
     with left:
-        section_header(tr("Exception Pareto Analysis", "异常帕累托分析"), tr("Leading exception categories and cumulative contribution.", "主要异常类别及其累计贡献。"))
+        section_header(tr("Main Problem Types", "主要问题类型"), tr("Most common issue categories and their cumulative share.", "最常见的问题类型及其累计占比。"))
         p = pareto.copy()
         exception_labels = {"LATE_DELIVERY":"延迟送达", "RECIPIENT_UNAVAILABLE":"收件人无法接收", "ACCESS_ISSUE":"进入受阻", "RETURN_TO_ORIGIN":"退回始发站", "PROCESS_EXCEPTION":"流程异常", "STATION_SORT_DELAY":"站点分拣延迟", "PROVIDER_CAPACITY_STRESS":"服务商运力压力", "LOCAL_PROCESS_DISRUPTION":"本地流程中断"}
         p["exception_label"] = p.exception_type.map(exception_labels) if st.session_state.get("language_zh") else p.exception_type

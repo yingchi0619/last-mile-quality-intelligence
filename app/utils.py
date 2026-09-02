@@ -40,7 +40,7 @@ def prior_period(all_data: pd.DataFrame, current: pd.DataFrame) -> pd.DataFrame:
 
 def grouped_performance(data: pd.DataFrame, group_columns: list[str]) -> pd.DataFrame:
     result = data.groupby(group_columns, observed=True).agg(
-        routes=("route_id", "size"), volume=("actual_packages", "sum"),
+        routes=("route_line_id", "nunique"), route_assignments=("route_id", "size"), volume=("actual_packages", "sum"),
         capacity=("planned_capacity", "sum"), packages=("package_records", "sum"),
         on_time=("on_time_packages", "sum"), delivered=("delivered_packages", "sum"),
         pod=("pod_compliant_packages", "sum"), exceptions=("exception_packages", "sum"),
@@ -52,8 +52,7 @@ def grouped_performance(data: pd.DataFrame, group_columns: list[str]) -> pd.Data
     result["pod_compliance"] = result["pod"] / result["delivered"]
     result["exception_rate"] = result["exceptions"] / result["packages"]
     result["utilization"] = result["volume"] / result["capacity"]
-    # One driver is assigned per route in the synthetic operating model.
-    result["packages_per_driver"] = result["volume"] / result["routes"]
+    result["packages_per_driver"] = result["volume"] / result["active_drivers"]
     return result
 
 

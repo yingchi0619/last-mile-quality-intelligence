@@ -61,12 +61,13 @@ def render(routes: pd.DataFrame) -> None:
     fig.update_yaxes(tickformat=fmt)
     st.plotly_chart(style_figure(fig, 340, True), use_container_width=True, config={"displayModeBar":False})
 
-    section_header(tr("Route Performance", "路线绩效"), tr("Sortable route execution detail with subtle risk highlighting.", "可排序的路线执行明细，并以轻量方式突出风险。"))
+    section_header(tr("Route Line Performance", "线路绩效"), tr("Sortable route-line execution detail with subtle risk highlighting.", "可排序的线路执行明细，并以轻量方式突出风险。"))
     table = current.copy()
     table["Risk"] = table.apply(lambda r: operational_status(r.on_time_delivery_rate, r.exception_rate, r.capacity_utilization), axis=1)
     table["Risk"] = table["Risk"].map(local_status)
-    table = table[["route_id", "provider_id", "station_id", "actual_packages", "route_density", "capacity_utilization", "pickup_delay_minutes", "on_time_delivery_rate", "exception_packages", "Risk"]]
+    table = table[["route_line_id", "route_id", "provider_id", "station_id", "driver_id", "actual_packages", "planned_pickup_timestamp", "actual_pickup_timestamp", "route_density", "capacity_utilization", "pickup_delay_minutes", "on_time_delivery_rate", "exception_packages", "Risk"]]
     st.dataframe(table, hide_index=True, width="stretch", height=440,
-        column_config={"route_id":tr("Route", "路线"), "provider_id":"DSP", "station_id":tr("Station", "站点"), "actual_packages":tr("Volume", "包裹量"),
+        column_config={"route_line_id":tr("Route Line", "线路"), "route_id":tr("Assignment", "任务"), "provider_id":"DSP", "station_id":tr("Station", "站点"), "driver_id":tr("Driver", "司机"), "actual_packages":tr("Volume", "包裹量"),
+            "planned_pickup_timestamp":st.column_config.DatetimeColumn(tr("Planned Pickup", "计划提货"), format="HH:mm"), "actual_pickup_timestamp":st.column_config.DatetimeColumn(tr("Actual Pickup", "实际提货"), format="HH:mm"),
             "route_density":st.column_config.NumberColumn(tr("Density", "路线密度"), format="%.2f"), "capacity_utilization":st.column_config.ProgressColumn(tr("Utilization", "利用率"), min_value=0, max_value=1.3, format="%.1%%"),
             "pickup_delay_minutes":st.column_config.NumberColumn(tr("Pickup Delay", "提货延迟"), format="%.1f min"), "on_time_delivery_rate":st.column_config.ProgressColumn(tr("OTD", "准时送达率"), min_value=0, max_value=1, format="%.1%%"), "exception_packages":tr("Exceptions", "异常包裹"), "Risk":tr("Risk", "风险")})

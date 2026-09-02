@@ -26,9 +26,10 @@ def database_path() -> Path:
 def route_data() -> pd.DataFrame:
     frame = execute_query(
         """
-        SELECT route_id, service_date, station_id, station_name, provider_id,
+        SELECT route_id, route_line_id, service_date, station_id, station_name, provider_id,
                provider_name, driver_id, planned_packages, planned_capacity,
                actual_packages, route_distance_miles, route_density,
+               planned_pickup_timestamp, actual_pickup_timestamp,
                pickup_delay_minutes, capacity_utilization, driver_reliability,
                package_records, delivered_packages, on_time_packages,
                pod_compliant_packages, exception_packages,
@@ -39,6 +40,8 @@ def route_data() -> pd.DataFrame:
         database_path(),
     )
     frame["service_date"] = pd.to_datetime(frame["service_date"])
+    frame["planned_pickup_timestamp"] = pd.to_datetime(frame["planned_pickup_timestamp"])
+    frame["actual_pickup_timestamp"] = pd.to_datetime(frame["actual_pickup_timestamp"])
     return frame
 
 

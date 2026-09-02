@@ -46,6 +46,7 @@ def build_model_dataset(
         """
         SELECT
             route_id,
+            route_line_id,
             service_date,
             provider_id,
             station_id,
