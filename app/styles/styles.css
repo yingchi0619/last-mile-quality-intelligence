@@ -1,7 +1,7 @@
 :root { --bg:#F5F7FB; --surface:#FFFFFF; --ink:#0F172A; --muted:#64748B; --line:#E2E8F0; --blue:#2563EB; --green:#15803D; --orange:#B45309; --red:#B91C1C; }
 .stApp { background:var(--bg); color:var(--ink); }
 [data-testid="stHeader"] { background:rgba(245,247,251,.82); backdrop-filter:blur(12px); }
-[data-testid="stToolbar"] { display:none!important; }
+[data-testid="stAppDeployButton"] { display:none!important; }
 [data-testid="stMainBlockContainer"] { max-width:1500px; padding:1.3rem 2rem 4rem; }
 [data-testid="stSidebar"] { background:#0B1220; border-right:1px solid #172033; }
 [data-testid="stSidebarNav"] { display:none!important; }

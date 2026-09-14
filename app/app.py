@@ -43,18 +43,18 @@ with st.sidebar:
     with st.expander(tr("About this platform", "关于本平台")):
         st.markdown(
             tr(
-                "**Synthetic Data + Independent Real ZIP Page**\n\nExcept for the East ZIP Difficulty page, this dashboard uses synthetic portfolio data.\n\nThe East ZIP Difficulty page reads the real claims workbook separately and is not joined to synthetic route-risk data.",
-                "**虚构数据 + 独立真实邮编页**\n\n除“美东邮编难度”页面外，本仪表板使用为作品集演示而创建的虚构数据。\n\n“美东邮编难度”页面单独读取真实 Excel，不与虚构路线风险数据混算。",
+                "**Portfolio Analytics + Public Route Data**\n\nThe East ZIP Difficulty map uses Census, police and OpenStreetMap data. Other dashboard modules use synthetic portfolio data.",
+                "**作品集分析 + 公开线路数据**\n\n美东邮编难度地图使用 Census、警方和 OpenStreetMap 公开数据；其他页面使用作品集模拟数据。",
             )
         )
-    st.markdown(f'<div class="sidebar-footer"><strong>{tr("PORTFOLIO DEMONSTRATION", "作品集演示项目")}</strong><br>{tr("Synthetic Data + Real ZIP Claims", "虚构数据 + 真实邮编理赔")}<br><br>{tr("Quality · Capacity · ZIP Difficulty", "质量 · 运力 · 邮编难度")}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="sidebar-footer"><strong>{tr("PORTFOLIO DEMONSTRATION", "作品集演示项目")}</strong><br>{tr("Public Route Difficulty Map", "公开数据线路难度地图")}<br><br>{tr("Quality · Capacity · ZIP Difficulty", "质量 · 运力 · 邮编难度")}</div>', unsafe_allow_html=True)
 
 st.markdown(
     f'<div class="platform-strip"><div><span class="platform-eyebrow">{tr("OPERATIONS CONTROL TOWER", "运营控制塔")}</span><strong>{tr("Last-Mile Operations Intelligence", "最后一公里运营智能")}</strong><small>{tr("Regional Quality, Capacity & Delivery Performance", "区域质量、运力与配送绩效")}</small></div></div>',
     unsafe_allow_html=True,
 )
 
-routes = route_data()
+routes = None if page == "route_risk" else route_data()
 pages = {
     "executive": executive_overview.render,
     "station_dsp": station_dsp.render,

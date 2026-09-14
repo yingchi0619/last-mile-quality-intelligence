@@ -1,12 +1,12 @@
 # Last-Mile Regional Quality Intelligence System
 
-> A portfolio-grade operations intelligence platform connecting synthetic last-mile data to KPI monitoring, SQL analytics, root-cause diagnosis, capacity scenarios, and an independent real-claims East Coast ZIP difficulty map.
+> A portfolio-grade operations intelligence platform connecting synthetic last-mile data to KPI monitoring, SQL analytics, root-cause diagnosis, capacity scenarios, and an independent public-data East Coast ZIP difficulty map.
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![DuckDB](https://img.shields.io/badge/DuckDB-Analytics-FFF000)](https://duckdb.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Tests](https://img.shields.io/badge/pytest-19%20passing-15803D)](#how-to-run)
-[![Data](https://img.shields.io/badge/Data-Synthetic%20%2B%20Real%20ZIP%20Claims-2563EB)](#data-confidentiality-disclaimer)
+[![Data](https://img.shields.io/badge/Data-Synthetic%20%2B%20Public%20Route%20Data-2563EB)](#data-confidentiality-disclaimer)
 
 ## Executive Summary
 
@@ -16,7 +16,7 @@ This project demonstrates how an operations strategy and analytics team could bu
 - repeatable root-cause and trend analysis in Python;
 - a capacity reallocation scenario simulator;
 - a leakage-aware prototype for identifying high-risk routes before dispatch;
-- an independent East Coast ZIP difficulty page built from real claim workbook data; and
+- an independent East Coast ZIP difficulty page built from Census, police and OpenStreetMap data; and
 - a polished five-page Streamlit control tower for operations leadership.
 
 The system connects data engineering, metric definition, operational diagnosis, scenario analysis, and executive communication—moving from reporting **what happened** to explaining **why it happened** and evaluating **what could be done next**.
@@ -37,7 +37,7 @@ Disconnected spreadsheets and isolated metrics make these questions difficult to
 
 Last-mile networks operate under tight time windows, variable demand, distributed workforces, and interdependent capacity constraints. A pickup delay or overloaded route can propagate into missed windows, higher exception volume, customer impact, and expensive recovery actions.
 
-Capacity utilization, route density, pickup compliance, service quality, exception Pareto analysis, and provider benchmarking are real-world logistics concepts. **Except for the standalone East Coast ZIP Difficulty page and files under `data/real/`, the companies, identifiers, records, metric values, model results, and findings in this repository are synthetic and do not describe any real organization.**
+Capacity utilization, route density, pickup compliance, service quality, exception Pareto analysis, and provider benchmarking are real-world logistics concepts. **Except for the standalone East Coast ZIP Difficulty page, public data under `app/route_map/`, and legacy files under `data/real/`, the companies, identifiers, records, metric values, model results, and findings in this repository are synthetic and do not describe any real organization.**
 
 ## System Architecture
 
@@ -175,9 +175,9 @@ The dashboard is designed as a modern internal operations product rather than a 
 2. **Station & DSP Performance** — provider drill-down, configurable trends, and route-level execution detail.
 3. **Root Cause Analysis** — dynamic findings, threshold bands, Pareto, and anomaly alerts.
 4. **Capacity Planning** — interactive reallocation controls and before-versus-after impact preview.
-5. **East ZIP Difficulty** — standalone real-claims ZIP map, ZIP difficulty ranking, claim-type mix, and state concentration.
+5. **East ZIP Difficulty** — Chinese interactive map of 755 ZIP areas with single/multiple ZIP selection, equal-weight route averages, and sourced crime, apartment, parking and business components. 737 ZIPs have complete scores; missing components never count as zero.
 
-Reusable components provide consistent filters, KPI cards, insight cards, status badges, chart styling, page headers, and data-source messaging. DuckDB queries, processed datasets, model artifacts, and the real ZIP claim workbook are cached for responsive interaction.
+Reusable components provide consistent filters, KPI cards, insight cards, status badges, chart styling, page headers, and data-source messaging. The route map bundles its Leaflet code, ZIP polygons and data in `app/route_map/`; it does not read claims or synthetic route data. Only optional OpenStreetMap background tiles require an external connection.
 
 Every dashboard page includes an **EN / 中文** control in the upper-right corner. The selected language is stored in the Streamlit session, so navigation between pages preserves the user's language until it is switched again.
 
@@ -301,11 +301,11 @@ Open `http://localhost:8501`. On Windows PowerShell, activate with `.venv\Script
 
 ## Data Confidentiality Disclaimer
 
-> **“Most analytical modules use synthetic data created for portfolio demonstration purposes. The East Coast ZIP Difficulty page is a standalone real-claims view sourced from `data/real/理赔分析.xlsx` and is not joined to the synthetic route-risk model.”**
+> **“Most analytical modules use synthetic data created for portfolio demonstration purposes. The East Coast ZIP Difficulty page uses a separate public-data model: crime 20%, apartment share 30%, parking proxies 25%, business density 25%. It does not use claim deductions.”**
 
 For the synthetic modules, every company, station, DSP, driver, route, package, timestamp, operating condition, metric, anomaly, recommendation, and model result is fictional. References to real-world logistics concepts describe general analytical methods only and must not be interpreted as representing the policies, systems, performance, or data of any actual company.
 
-The real ZIP difficulty module should be treated as real claim data. Review repository visibility, sharing audience, and any confidentiality requirements before distributing access.
+Map snapshot: 2026-09-11, imported from https://gofo-east-route-map.nayukiki.chatgpt.site/. Source URLs, periods and geographic limitations are preserved in `app/route_map/data-meta.json` and the map's methodology dialog. Scores are model estimates, not measured delivery difficulty. The legacy files under `data/real/` are no longer used by the dashboard map.
 
 ---
 

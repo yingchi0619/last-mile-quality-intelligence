@@ -1,0 +1,121 @@
+{
+  "retrieved": "2026-09-11",
+  "model": "public-proxy-v3-20260911",
+  "boundary_rule": "四个邮编代表点连线，按邮编代表点保留北侧区域；四个边界邮编保留。该范围待业务核对。",
+  "boundary_anchors": [
+    {
+      "zip": "08051",
+      "lat": 39.7858104,
+      "lon": -75.1789263
+    },
+    {
+      "zip": "08690",
+      "lat": 40.2251676,
+      "lon": -74.6608212
+    },
+    {
+      "zip": "08527",
+      "lat": 40.1047837,
+      "lon": -74.350359
+    },
+    {
+      "zip": "08701",
+      "lat": 40.076357,
+      "lon": -74.2031453
+    }
+  ],
+  "counts": {
+    "total": 755,
+    "removed": 231,
+    "nyc": 142,
+    "nj": 436,
+    "li": 177,
+    "complete": 737,
+    "housing": 739,
+    "business": 751,
+    "crime": 750,
+    "parking": 755,
+    "crime_nyc": 142,
+    "crime_li": 177,
+    "crime_nj_agency": 404,
+    "crime_nj_fallback": 32
+  },
+  "crime_audit": {
+    "queried_felony_records": 141848,
+    "model_group_records": 91713,
+    "mapped_model_group_records": 91454
+  },
+  "nj_crime_audit": {
+    "agencies": 469,
+    "exact_zcta": 404,
+    "fuzzy_zcta": 0,
+    "county_fallback_zcta": 32
+  },
+  "road_audit": {
+    "road_ways": 1037115,
+    "clipped_way_parts": 860229,
+    "signals": 31237,
+    "intersection_nodes": 1115839
+  },
+  "parking_audit": {
+    "unique_coordinate_pairs": 33412,
+    "mapped_to_retained_zcta": 33292
+  },
+  "sources": {
+    "housing": {
+      "title": "Census ACS 2020–2024 · B25024",
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25024.dat",
+      "method": "2户及以上建筑中的住房单元（E004–E009）÷全部住房单元E001；估计值，含抽样误差。"
+    },
+    "population": {
+      "title": "Census ACS 2020–2024 · B01003",
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
+    },
+    "business": {
+      "title": "Census 2023 ZIP Code Business Patterns",
+      "url": "https://www2.census.gov/programs-surveys/cbp/datasets/2023/zbp23totals.zip",
+      "method": "有雇员商业机构总数÷ZCTA陆地平方公里；是商务地址密度代理，不含全部无雇员经营者。"
+    },
+    "crime_nyc": {
+      "title": "NYPD Complaint Data Historic · 2024",
+      "url": "https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-Data-Historic/qgea-i56i",
+      "method": "谋杀、强奸、抢劫、重罪袭击、入室盗窃、重大盗窃和机动车盗窃，按坐标归属ZCTA并除以ACS人口；四个分项在纽约市邮编中取百分位。"
+    },
+    "crime_nj": {
+      "title": "NJSP Uniform Crime Report · 2024 Q1",
+      "url": "https://www.nj.gov/njsp/ucr/current-crime-data1.shtml",
+      "method": "2024年1–3月各报告机构的暴力犯罪、入室盗窃、盗窃和机动车盗窃率；ZCTA代表点映射至municipality。无独立机构时采用该县机构人口加权率。分项在NJ机构中取百分位。"
+    },
+    "crime_li": {
+      "title": "NY DCJS County Crime Rates · 2024",
+      "url": "https://data.ny.gov/Public-Safety/Index-Violent-Property-and-Firearm-Rates-By-County-Be/34dd-6g2j",
+      "method": "Nassau或Suffolk县的暴力和财产犯罪率；分项在纽约州62县中取百分位。同一县内邮编共享县级值。"
+    },
+    "parking": {
+      "title": "OpenStreetMap / Geofabrik · 2026-09-10",
+      "url": "https://download.geofabrik.de/north-america/us.html",
+      "method": "静态拥堵压力×40% + 通行受限道路代理×35% + 红绿灯密度百分位×25%。道路几何与ZCTA相交后裁切计长；红绿灯和交叉口按点所在ZCTA归属。这是静态路网压力，不是实时车速或实际找车位时间。"
+    },
+    "parking_nyc": {
+      "title": "NYC DOT Parking Regulation Locations and Signs",
+      "url": "https://data.cityofnewyork.us/Transportation/Parking-Regulation-Locations-and-Signs/nfid-uabd",
+      "method": "Current状态且描述含NO STANDING ANYTIME或NO STOPPING ANYTIME的标志点，仅作为纽约市额外证据展示，不参与跨地区停车分。"
+    },
+    "boundary": {
+      "title": "Census 2020 ZCTA · TIGERweb ACS 2024",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2024/MapServer/2"
+    }
+  },
+  "input_sha256": {
+    "housing.dat": "26ff26c645d1abc55c3b47998931cea45af40600a6e8d36228d3ed7493add2ef",
+    "population.dat": "38d1a992bb058d184009b10b9b34987279aee575e4323165cfb5706c69b6ca90",
+    "business.zip": "109c181205bef49a972935fa059d8b067754cb4a0c2fceff7280b4b3c665e6e8",
+    "nyc-crime-categories.json": "a7ee9033f1e41787f08bb290c594789d3cb5229efbe2b8830f5e2b9083edf86a",
+    "ny-county-crime-2024.json": "f15378bb96be0ae58228188a0518fcba5ffb1f8f5de64b30311117b7bbe2c24b",
+    "nj-crime-2024-q1.xlsx": "52a31d218abed24b7b23105558e3fdce529c6afed4e87ac1de3fcce1ec1eca6d",
+    "tl_2024_34_cousub.zip": "96ba1216bfaab00aed9e0639936457c98bec302a5c150dd666dc1768872e4bf8",
+    "parking-points.json": "929edca51bdf49f3d2abb851c80637c489f827ce0596639842063588712b6900",
+    "boundaries.raw": "c212d475206b26786e3253baf17326e7edd3f2446c5836adba6d05968b8bf902",
+    "public-road-proxies.json": "53e66ea977a902a21e2097902ab60a487cd51a0785e00220bb1eb22271673489"
+  }
+}

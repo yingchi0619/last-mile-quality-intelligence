@@ -1,0 +1,12 @@
+/* Keep the map stable while route details expand inside the dashboard. */
+* { letter-spacing: 0 !important; }
+main { min-height: 0; align-items: start; }
+.workspace { padding: 20px 18px 0; }
+.map-wrap { flex: none; height: 580px; min-height: 580px; }
+aside { max-height: 980px; overflow-y: auto; }
+header { padding: 0 18px; }
+@media (max-width: 760px) {
+  aside { max-height: none; overflow: visible; }
+  .map-wrap { height: 460px; min-height: 460px; }
+  .map-legend { width: 190px; padding: 10px; }
+}
