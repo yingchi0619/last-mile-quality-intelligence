@@ -31,7 +31,7 @@ with st.sidebar:
         "station_dsp": tr("02  Station & DSP Performance", "02  站点与 DSP 绩效"),
         "root_cause": tr("03  Root Cause Analysis", "03  根因分析"),
         "capacity": tr("04  Capacity Planning", "04  运力规划"),
-        "route_risk": tr("05  Route Risk", "05  路线风险"),
+        "route_risk": tr("05  East ZIP Difficulty", "05  美东邮编难度"),
     }
     page = st.radio(
         tr("Platform Navigation", "平台导航"),
@@ -43,11 +43,11 @@ with st.sidebar:
     with st.expander(tr("About this platform", "关于本平台")):
         st.markdown(
             tr(
-                "**Synthetic Data**\n\nThis dashboard uses entirely synthetic data created for portfolio demonstration purposes.\n\nNo proprietary, confidential, customer, driver, route, pricing, or operational data from any current or former employer is included.",
-                "**虚构数据**\n\n本仪表板仅使用为作品集演示而创建的完全虚构数据。\n\n不包含任何现任或前任雇主的专有、保密、客户、司机、路线、价格或运营数据。",
+                "**Synthetic Data + Independent Real ZIP Page**\n\nExcept for the East ZIP Difficulty page, this dashboard uses synthetic portfolio data.\n\nThe East ZIP Difficulty page reads the real claims workbook separately and is not joined to synthetic route-risk data.",
+                "**虚构数据 + 独立真实邮编页**\n\n除“美东邮编难度”页面外，本仪表板使用为作品集演示而创建的虚构数据。\n\n“美东邮编难度”页面单独读取真实 Excel，不与虚构路线风险数据混算。",
             )
         )
-    st.markdown(f'<div class="sidebar-footer"><strong>{tr("PORTFOLIO DEMONSTRATION", "作品集演示项目")}</strong><br>{tr("Synthetic Operational Data", "虚构运营数据")}<br><br>{tr("Quality · Capacity · Risk", "质量 · 运力 · 风险")}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="sidebar-footer"><strong>{tr("PORTFOLIO DEMONSTRATION", "作品集演示项目")}</strong><br>{tr("Synthetic Data + Real ZIP Claims", "虚构数据 + 真实邮编理赔")}<br><br>{tr("Quality · Capacity · ZIP Difficulty", "质量 · 运力 · 邮编难度")}</div>', unsafe_allow_html=True)
 
 st.markdown(
     f'<div class="platform-strip"><div><span class="platform-eyebrow">{tr("OPERATIONS CONTROL TOWER", "运营控制塔")}</span><strong>{tr("Last-Mile Operations Intelligence", "最后一公里运营智能")}</strong><small>{tr("Regional Quality, Capacity & Delivery Performance", "区域质量、运力与配送绩效")}</small></div></div>',
